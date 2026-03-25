@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Appointments</h2>
+
+<div class="card">
+    <table>
+        <tr>
+            <th>Patient</th>
+            <th>Doctor</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Status</th>
+            {% if session['role'] == "doctor" %}
+            <th>Action</th>
+            {% endif %}
+        </tr>
+
+        {% for a in appointments %}
+        <tr>
+            <td>{{ a[1] }}</td>
+            <td>{{ a[2] }}</td>
+            <td>{{ a[3] }}</td>
+            <td>{{ a[4] }}</td>
+            <td>{{ a[5] }}</td>
+
+            {% if session['role'] == "doctor" %}
+            <td>
+                <a href="/approve/{{ a[0] }}">✔</a>
+                <a href="/reject/{{ a[0] }}">✖</a>
+            </td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

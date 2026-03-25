@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="form-box">
+    <h2>My Profile</h2>
+
+    <form method="POST">
+
+        <input name="name" value="{{ user[1] }}">
+        <input name="email" value="{{ user[2] }}" readonly>
+
+        <input name="phone" value="{{ user[5] }}">
+        <input name="address" value="{{ user[6] }}">
+
+        <!-- Doctor Extra -->
+        {% if user[4] == "doctor" %}
+            <input name="hospital" value="{{ user[7] }}" placeholder="Hospital">
+            <input name="specialization" value="{{ user[8] }}" placeholder="Specialization">
+        {% endif %}
+
+        <!-- Patient Extra -->
+        {% if user[4] == "patient" %}
+            <input name="health_problem" value="{{ user[9] }}">
+            <input name="assigned_doctor" value="{{ user[10] }}">
+        {% endif %}
+
+        <button>Update</button>
+    </form>
+</div>
+
+{% endblock %}

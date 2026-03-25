@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Patient Dashboard</h2>
+
+<!-- MY APPOINTMENTS -->
+<div class="card">
+    <h3>My Appointments</h3>
+
+    <table>
+        <tr>
+            <th>Doctor</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Status</th>
+        </tr>
+
+        {% for a in appointments %}
+        <tr>
+            <td>{{ a[2] }}</td>
+            <td>{{ a[3] }}</td>
+            <td>{{ a[4] }}</td>
+            <td>{{ a[5] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<div class="cards">
+
+    <!-- BOOK APPOINTMENT -->
+    <div class="card">
+        <h3>Book Appointment</h3>
+        <form method="POST" action="/book">
+            <select name="doctor">
+                {% for d in doctors %}
+                <option>{{ d[0] }}</option>
+                {% endfor %}
+            </select>
+
+            <input type="date" name="date" required>
+            <input type="time" name="time" required>
+
+            <button type="submit">Book</button>
+        </form>
+    </div>
+
+    <!-- UPLOAD REPORT -->
+    <div class="card">
+        <h3>Upload Report</h3>
+        <form method="POST" action="/upload" enctype="multipart/form-data">
+            <input type="file" name="file" required>
+            <input name="desc" placeholder="Description">
+            <button>Upload</button>
+        </form>
+    </div>
+
+    <!-- MY REPORTS -->
+    <div class="card">
+        <h3>My Reports</h3>
+
+        <table>
+            <tr>
+                <th>File</th>
+                <th>Description</th>
+            </tr>
+
+            {% for r in reports %}
+            <tr>
+                <td>
+                    <a href="{{ url_for('static', filename='uploads/' + r[3]) }}" target="_blank">
+                        View
+                    </a>
+                </td>
+                <td>{{ r[4] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

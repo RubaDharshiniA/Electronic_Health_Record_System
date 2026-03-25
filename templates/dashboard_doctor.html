@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Doctor Dashboard</h2>
+
+<div class="cards">
+
+    <div class="card">
+        <h3>My Patients</h3>
+        <ul>
+            {% for p in patients %}
+            <li>{{ p[1] }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="card">
+        <h3>Appointments</h3>
+        <table>
+            <tr><th>Patient</th><th>Date</th><th>Status</th><th>Action</th></tr>
+            {% for a in appointments %}
+            <tr>
+                <td>{{ a[1] }}</td>
+                <td>{{ a[3] }} {{ a[4] }}</td>
+                <td>{{ a[5] }}</td>
+                <td>
+                    <a href="/approve/{{ a[0] }}">✔</a>
+                    <a href="/reject/{{ a[0] }}">✖</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</div>
+
+{% endblock %}

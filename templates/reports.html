@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Reports</h2>
+
+<div class="cards">
+
+    <!-- Upload -->
+    <div class="card">
+        <h3>Upload Report</h3>
+
+        <form method="POST" action="/upload" enctype="multipart/form-data">
+            <input type="file" name="file" required>
+            <input name="desc" placeholder="Description">
+            <button>Upload</button>
+        </form>
+    </div>
+
+    <!-- View -->
+    <div class="card">
+        <h3>My Reports</h3>
+
+        <table>
+            <tr>
+                <th>File</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+
+            {% for r in reports %}
+            <tr>
+                <td>
+                    <a href="{{ url_for('static', filename='uploads/' + r[3]) }}" target="_blank">
+                        View
+                    </a>
+                </td>
+                <td>{{ r[4] }}</td>
+                <td>
+                    <a href="/delete_report/{{ r[0] }}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="form-box">
+    <h2>Register</h2>
+
+    <form method="POST">
+
+        <input name="name" placeholder="Name" required>
+        <input name="email" placeholder="Email" required>
+        <input name="password" type="password" placeholder="Password" required>
+
+        <select name="role" id="role">
+            <option value="admin">Admin</option>
+            <option value="doctor">Doctor</option>
+            <option value="patient">Patient</option>
+        </select>
+
+        <input name="phone" placeholder="Phone">
+        <input name="address" placeholder="Address">
+
+        <!-- Doctor Fields -->
+        <div id="doctorFields">
+            <input name="hospital" placeholder="Hospital Name">
+            <input name="specialization" placeholder="Specialization">
+        </div>
+
+        <!-- Patient Fields -->
+        <div id="patientFields">
+            <input name="health_problem" placeholder="Health Problem">
+            <input name="assigned_doctor" placeholder="Doctor Name">
+        </div>
+
+        <button type="submit">Register</button>
+    </form>
+</div>
+
+<script>
+document.getElementById("role").addEventListener("change", function(){
+    let role = this.value;
+    document.getElementById("doctorFields").style.display = role==="doctor" ? "block":"none";
+    document.getElementById("patientFields").style.display = role==="patient" ? "block":"none";
+});
+</script>
+
+{% endblock %}
